@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import flowers from "../data.js";
+import flowers from "data.js";
 
 var images ='';
 
