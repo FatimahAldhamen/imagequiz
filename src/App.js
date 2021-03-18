@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import flowers from "./data.js";
 
-var images = [[]];
+var images = new Array(new Array);
 
 for (let i = 0;i < flowers.length;i++) 
 {
