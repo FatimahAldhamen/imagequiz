@@ -1,23 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import flowers from "../data.js";
+
+var images ='';
+
+for (let i = 0; i < flowers.length; i++) 
+{ 
+  images +=` <div class="imgs">
+    <div class="img"><img src="` +
+  flowers[i].picture +
+  `" alt=""></div>
+    <div class="name">` + flowers[i].name + `
+    </div>
+    </div>`; 
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div id="imgContainer">{images}</div>
     </div>
   );
 }
