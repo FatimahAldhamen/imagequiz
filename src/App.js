@@ -2,23 +2,29 @@ import logo from './logo.svg';
 import './App.css';
 import flowers from "./data.js";
 
-var images ='';
+var images = [[]];
 
-for (let i = 0; i < flowers.length; i++) 
-{ 
-  images +=` <div class="imgs">
-    <div class="img"><img src="` +
-  flowers[i].picture +
-  `" alt=""></div>
-    <div class="name">` + flowers[i].name + `
-    </div>
-    </div>`; 
+for (let i = 0;i < flowers.length;i++) 
+{
+  images[i][0] = flowers[i].picture;
+  images[i][1] = flowers[i].name;
 }
 
-function App() {
+function App()
+{
   return (
     <div className="App">
-      <div id="imgContainer">{images}</div>
+      <header className="App-header">
+        <div id="imgContainer">
+          {images.map(image => (
+            <div class="imgs">
+              <div class="img"><img src={image[0]} alt="" /></div>
+              <div class="name">{image[1]}
+              </div>
+            </div>
+          ))}
+        </div>
+      </header>
     </div>
   );
 }
