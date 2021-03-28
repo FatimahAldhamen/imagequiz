@@ -77,10 +77,6 @@
 }
 
 .nav-quiz-btn {
-    background-color: white;
-}
-
-.nav-quiz-btn {
     display: flex;
     justify-content: space-between;
     margin: 0;
@@ -106,4 +102,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+#result {
+    font-weight: bold;
+    text-align: left;
 }

@@ -5,6 +5,8 @@ import { Container, Figure, Row, Col, Card, Button } from "react-bootstrap";
 import quizzes from './data';
 
 var score = 0;
+var result='';
+var resultColor='';
 function Homepage() {
 
     const [currentQuiz, setCurrentQuiz] = useState(-1);
@@ -16,8 +18,17 @@ function Homepage() {
     const answerHandler = (e) => {
         if (quizzes[currentQuiz][currentQuestion].answer === e) {
             score += 1;
+            result = "Correct";
+            resultColor = 'lime';
+        }else{
+            result = "InCorrect";
+            resultColor = 'red';
         }
-        setCurrentQuestion(currentQuestion + 1);
+        setTimeout(() => {
+            
+            setCurrentQuestion(currentQuestion + 1);
+            result='';
+    }, 500);
     }
     const navQuizBtnHandler = (e) => {
         if (e === "home") {
@@ -56,6 +67,7 @@ function Homepage() {
                                 {quizzes[currentQuiz][currentQuestion].choices.map((choice, i) => (
                                     <label htmlFor={i + "option"} className="optionLabel" key={i}><input key={i} id={i + "option"} value={choice} checked={false} onChange={() => answerHandler(choice)} name="options" className="mr-2" type="radio" />{choice}</label>
                                 ))}
+                                <div id="result" style={{color:resultColor}}>{result}</div>
                             </Col>
                         </Row>
                     </Card.Body>
