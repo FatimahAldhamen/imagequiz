@@ -13,7 +13,6 @@ function Homepage() {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const imageClickHandler = (e) => {
         setCurrentQuiz(e);
-        console.log(e);
     }
     const answerHandler = (e) => {
         if (quizzes[currentQuiz][currentQuestion].answer === e) {
@@ -40,7 +39,6 @@ function Homepage() {
             score = 0;
         }
     }
-    console.log(quizzes);
     return (
         (currentQuiz === -1) ? (
             <Container >
