@@ -1,33 +1,58 @@
 import '../App.css';
 import React, { useState } from 'react';
-import flowers from "../data.js";
 import { Container, Figure, Row, Col, Card, Button } from "react-bootstrap";
-import quizzes from './data';
 
-var score = 0;
-var result='';
-var resultColor='';
-function Homepage() {
+let quizzes = [];
+let flowers = [];
+let score = 0;
+let result = '';
+let resultColor = '';
 
-    const [currentQuiz, setCurrentQuiz] = useState(-1);
+const flowersURL = `https://fatimahaldhamen-imagequiz.herokuapp.com/flowers`;
+fetch(flowersURL, { method: 'GET' })
+.then((res) => res.json())
+.then((data) => {
+    flowers = data;
+});
+
+const quizzesURL = `https://fatimahaldhamen-imagequiz.herokuapp.com/quizzes`;
+fetch(quizzesURL, { method: 'GET' })
+.then((res) => res.json())
+.then((data) => {
+    quizzes = data;
+});
+
+function Homepage(email) {
+const postResults = () =>{
+    fetch('https://fatimahaldhamen-imagequiz.herokuapp.com/score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: email , score:score})
+    })
+    .then(response => response.json())
+    .then(data => console.log(data));
+}
+
+
+const [currentQuiz, setCurrentQuiz] = useState(-1);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const imageClickHandler = (e) => {
         setCurrentQuiz(e);
     }
     const answerHandler = (e) => {
-        if (quizzes[currentQuiz][currentQuestion].answer === e) {
+        if (quizzes[currentQuiz].quiz[currentQuestion].answer === e) {
             score += 1;
             result = "Correct";
             resultColor = 'lime';
-        }else{
+        } else {
             result = "InCorrect";
             resultColor = 'red';
         }
         setTimeout(() => {
-            
+
             setCurrentQuestion(currentQuestion + 1);
-            result='';
-    }, 500);
+            result = '';
+        }, 500);
     }
     const navQuizBtnHandler = (e) => {
         if (e === "home") {
@@ -58,14 +83,14 @@ function Homepage() {
                         <Row>
                             <Col>
                                 <Figure>
-                                    <Figure.Image className="rounded" src={quizzes[currentQuiz][currentQuestion].picture} alt="" />
+                                    <Figure.Image className="rounded" src={quizzes[currentQuiz].quiz[currentQuestion].picture} alt="" />
                                 </Figure>
                             </Col>
                             <Col>
-                                {quizzes[currentQuiz][currentQuestion].choices.map((choice, i) => (
+                                {quizzes[currentQuiz].quiz[currentQuestion].choices.map((choice, i) => (
                                     <label htmlFor={i + "option"} className="optionLabel" key={i}><input key={i} id={i + "option"} value={choice} checked={false} onChange={() => answerHandler(choice)} name="options" className="mr-2" type="radio" />{choice}</label>
                                 ))}
-                                <div id="result" style={{color:resultColor}}>{result}</div>
+                                <div id="result" style={{ color: resultColor }}>{result}</div>
                             </Col>
                         </Row>
                     </Card.Body>
@@ -74,6 +99,7 @@ function Homepage() {
                 <Card className="rounded quiz-container">
                     <Card.Body className="quiz-score-container">
                         <h2 className="Score">
+                            {postResults()}
                             Your Score is {score}
                         </h2>
                         <Row className="nav-quiz-btn-wrapper">

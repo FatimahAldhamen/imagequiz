@@ -10,7 +10,8 @@
         "react": "^17.0.1",
         "react-bootstrap": "^1.5.2",
         "react-dom": "^17.0.1",
-        "react-scripts": "4.0.3",
+        "react-scripts": "^4.0.3",
+        "watchpack": "^1.7.5",
         "web-vitals": "^1.1.1"
     },
     "homepage": "http://fatimahaldhamen.github.io/imagequiz",

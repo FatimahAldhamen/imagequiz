@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import LoginForm from './components/LoginForm';
 import Homepage from './components/Homepage';
 
-
+let detail;
 function App()
 {
   const adminUser = {
@@ -18,6 +18,7 @@ function App()
   {
     if (details.email === adminUser.email && details.password === adminUser.password)
     {
+      detail = details;
       console.log('Logged In!');
       setUser({
         email: details.name,
@@ -34,7 +35,7 @@ function App()
   return (
     <div className="App">
       {(user.email !== "") ? (
-        <Homepage />
+        <Homepage email={detail.email}/>
       ) : (
         <LoginForm Login={Login} error={error} />
       )}
