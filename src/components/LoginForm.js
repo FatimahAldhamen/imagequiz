@@ -15,12 +15,12 @@ function LoginForm({Login,error})
             {(error!=="")?( <div className="error">{error}</div> ):("")}
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" onChange={e=> setDetails({...details, email: e.target.value})} value={details.email}/>
+                <Form.Control type="email" placeholder="Enter email" defaultValue="admin@admin.com" onChange={e=> setDetails({...details, email: e.target.value})} value={details.email}/>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" onChange={e=> setDetails({...details, password: e.target.value})} value={details.password} />
+                <Form.Control type="password" placeholder="Password" defaultValue="admin123" onChange={e=> setDetails({...details, password: e.target.value})} value={details.password} />
             </Form.Group>
             <Button variant="primary" className="btn-block" type="submit">
                 Submit
