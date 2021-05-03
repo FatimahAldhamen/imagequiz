@@ -27,7 +27,7 @@ const postResults = () =>{
     fetch('https://fatimahaldhamen-imagequiz.herokuapp.com/score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: email , score:score})
+        body: JSON.stringify({ customerid:1,quizid:currentQuiz , score:score})
     })
     .then(response => response.json())
     .then(data => console.log(data));
